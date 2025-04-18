@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "97adOaaj6jr8MoxVsUXt4zpfksEo7zNd2evu2izh7Dc=",
+  "Source": "stillmind-api",
+  "BasePath": "_content/stillmind-api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
