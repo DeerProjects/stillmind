@@ -2,6 +2,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using stillmind_api.Dtos;
 using StillMindAPI.Data;
 using StillMindAPI.Models;
 
@@ -19,18 +20,27 @@ namespace StillMindAPI.Controllers
             _db = db;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create(Note note)
+        [HttpPost("Create/Note")]
+        public async Task<IActionResult> Create (CreateNoteDto dto)
         {
-            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
-
-            note.UserId = userId;
-            note.CreatedAt = DateTime.UtcNow;
-
+           int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
+            
+            var note = new Note
+            {
+                Content = dto.Content,
+                CreatedAt = DateTime.UtcNow,
+                UserId = userId
+            };
+        
             _db.Notes.Add(note);
             await _db.SaveChangesAsync();
 
-            return Ok(note);
+            return Ok(new NoteDto
+            {
+                Id = note.Id,
+                Content = note.Content,
+                CreatedAt = note.CreatedAt
+            });
         }
 
         [HttpGet]
@@ -39,13 +49,18 @@ namespace StillMindAPI.Controllers
             int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
 
             var notes = await _db.Notes
-                .Where(n => n.UserId == userId)
-                .OrderByDescending(n => n.CreatedAt)
-                .ToListAsync();
+            .Where(n => n.UserId == userId)
+            .OrderByDescending(n => n.CreatedAt)
+            .Select(n => new NoteDto{
+                Id = n.Id,
+                Content = n.Content,
+                CreatedAt = n.CreatedAt
+            })
+            .ToListAsync();
 
             return Ok(notes);
-        }
 
+        }
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\emree\\stillmind\\stillmind-api\\stillmind-api.csproj": {}
+    "C:\\Users\\emree\\OneDrive\\Dokumente\\GitHub\\stillmind\\stillmind-api\\stillmind-api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\emree\\stillmind\\stillmind-api\\stillmind-api.csproj": {
+    "C:\\Users\\emree\\OneDrive\\Dokumente\\GitHub\\stillmind\\stillmind-api\\stillmind-api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\emree\\stillmind\\stillmind-api\\stillmind-api.csproj",
+        "projectUniqueName": "C:\\Users\\emree\\OneDrive\\Dokumente\\GitHub\\stillmind\\stillmind-api\\stillmind-api.csproj",
         "projectName": "stillmind-api",
-        "projectPath": "C:\\Users\\emree\\stillmind\\stillmind-api\\stillmind-api.csproj",
+        "projectPath": "C:\\Users\\emree\\OneDrive\\Dokumente\\GitHub\\stillmind\\stillmind-api\\stillmind-api.csproj",
         "packagesPath": "C:\\Users\\emree\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\emree\\stillmind\\stillmind-api\\obj\\",
+        "outputPath": "C:\\Users\\emree\\OneDrive\\Dokumente\\GitHub\\stillmind\\stillmind-api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\emree\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -54,11 +54,17 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[9.0.3, )"
+              "version": "[9.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[9.0.3, )"
+              "version": "[9.0.4, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -88,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

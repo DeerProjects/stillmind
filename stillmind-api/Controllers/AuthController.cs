@@ -5,6 +5,8 @@ using System.Text;
 using StillMindAPI.Data;
 using StillMindAPI.Models;
 using StillMindAPI.Services;
+using stillmind_api.Dtos;
+using Microsoft.AspNetCore.Identity;
 
 namespace StillMindAPI.Controllers
 {
@@ -22,20 +24,37 @@ namespace StillMindAPI.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(User user)
+public async Task<IActionResult> Register(RegisterUserDto dto)
+{
+    try
+    {
+        if (await _db.Users.AnyAsync(u => u.Username == dto.Username))
+            return BadRequest("Username already taken.");
+
+        var user = new User
         {
-            if (await _db.Users.AnyAsync(u => u.Username == user.Username))
-                return BadRequest("Username already taken.");
+            Username = dto.Username,
+            PasswordHash = Hash(dto.PasswordHash)
+        };
 
-            user.PasswordHash = Hash(user.PasswordHash);
-            _db.Users.Add(user);
-            await _db.SaveChangesAsync();
+        _db.Users.Add(user);
+        await _db.SaveChangesAsync();
 
-            return Ok("Registered successfully.");
-        }
+        return Ok("Registered successfully.");
+    }
+    catch (Exception ex)
+    {
+        return StatusCode(500, new
+        {
+            error = ex.Message,
+            stack = ex.StackTrace,
+            inner = ex.InnerException?.Message
+        });
+    }
+}
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(User login)
+        public async Task<IActionResult> Login(LoginUserDto login)
         {
             var user = await _db.Users.FirstOrDefaultAsync(u => u.Username == login.Username);
             if (user == null || user.PasswordHash != Hash(login.PasswordHash))
@@ -44,6 +63,7 @@ namespace StillMindAPI.Controllers
             var token = _jwt.GenerateToken(user);
             return Ok(new { token });
         }
+
 
         private string Hash(string password)
         {

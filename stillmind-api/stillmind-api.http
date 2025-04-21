@@ -1,6 +1,8 @@
 @stillmind_api_HostAddress = http://localhost:5276
 
-GET {{stillmind_api_HostAddress}}/weatherforecast/
+GET http://localhost:5276/api/auth/login
+GET http://localhost:5276/api/notes
+
 Accept: application/json
 
 ###

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("stillmind-api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+091bc240a541a40c2be4b4cb98e1fcffed9e855b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6fdb63197c6e66dc141aa646619cd8e703ceead6")]
 [assembly: System.Reflection.AssemblyProductAttribute("stillmind-api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("stillmind-api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
