@@ -8,6 +8,18 @@ using StillMindAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5173") // your frontend port
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
 // 💾 Database setup (SQLite)
 builder.Services.AddDbContext<StillMindDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("Default")));
@@ -30,7 +42,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         {
             OnAuthenticationFailed = context =>
             {
-                Console.WriteLine("❌ JWT AUTH FAILED: " + context.Exception.Message);
+                Console.WriteLine("JWT AUTH FAILED: " + context.Exception.Message);
                 return Task.CompletedTask;
             }
         };
@@ -92,6 +104,7 @@ if (app.Environment.IsDevelopment())
 
 // 🚀 Middleware
 app.UseHttpsRedirection();
+app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers(); // make sure you use [ApiController] in your controllers
